@@ -76,7 +76,7 @@ def login(request):
             request.session["provider_id"] = logged_provider.id
             request.session["provider_name"] = logged_provider.name
 
-        return redirect("/provider_dashboard")
+        return redirect("/my_dashboard/provider_dashboard")
 
 
 def register(request):
@@ -123,7 +123,7 @@ def provider_register(request):
         permit=request.POST["permit"],
         location=request.POST["location"],
     )
-    return redirect("/provider_dashboard")
+    return redirect("/my_dashboard/provider_dashboard")
 
 
 def delete(request):
