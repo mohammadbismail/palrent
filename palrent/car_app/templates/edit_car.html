@@ -1,59 +1,71 @@
 {% extends 'base.html' %}
 {% block content%}
 
+<style>
+    .container {
+        display: flex;
+    }
+</style>
 <div class="container">
-    <a href="/provider_dashboard/">
+    <a href="/my_dashboard/provider_dashboard/">
         <button type="submit" class="btn-outline">My garage</button>
     </a>
     <div class="col" id="form_body">
         <h4>Add New car to list</h4>
         <div class="col car_form">
             <div class="row car_details">
-                <form action="/insert_car/" method="post">
+                <input type="hidden" name="car_id" value="{{car.id}}">
+                <form action="/my_dashboard/edit_my_car/{{car.id}}/" method="post">
                     {% csrf_token %}
-                    <div class="row-sm-6">
-                        <label for="brand" class="form-label">Car Brand</label>
-                        <input type="text" class="form-control" name="brand" id="brand" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                            Brand is required.
-                        </div>
+                    <div class="mb-3 mb-md-0 col-md-3">
+                        <label for="brand" class="form-label">Select Brand: {{car.brand}}</label>
+                        <select name="brand" id="brand" class="custom-select form-control" aria-placeholder="now">
+                            <option value="null">Select Brand</option>
+                            <option value="Ferrari">Ferrari</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Lamborghini">Lamborghini</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Obel">Obel</option>
+                            <option value="Mazda">Mazda</option>
+                        </select>
                     </div>
                     <div class="row-sm-6">
                         <label for="model" class="form-label">Model</label>
-                        <input type="text" class="form-control" name="model" id="model" placeholder="" value="" required>
+                        <input type="text" class="form-control" name="model" id="model" placeholder="{{car.model}}" value="" required>
                         <div class="invalid-feedback">
                             Model is required.
                         </div>
                     </div>
                     <div class="row-sm-6">
                         <label for="color" class="form-label">Color</label>
-                        <input type="text" class="form-control" name="color" id="color" placeholder="" value="" required>
+                        <input type="text" class="form-control" name="color" id="color" placeholder="{{car.color}}" value="" required>
                         <div class="invalid-feedback">
                             Color is required.
                         </div>
                     </div>
                     <div class="row-6">
                         <label for="production_year" class="form-label">Production year</label>
-                        <input type="number" class="form-control" name="production_year" id="production_year" placeholder="" required>
+                        <input type="number" class="form-control" name="production_year" id="production_year" placeholder="{{car.production_year}}" required>
                         <div class="invalid-feedback">
                             Production Year is required.
                         </div>
                     </div>
                     <div class="row-6">
                         <label for="plate_number" class="form-label">Plate Number</label>
-                        <input type="number" class="form-control" name="plate_number" id="production_year" placeholder="" required>
+                        <input type="number" class="form-control" name="plate_number" id="production_year" placeholder="{{car.plate_number}}" required>
                         <div class="invalid-feedback">
                             Plate Number is required.
                         </div>
                     </div>
                     <div class="row-6">
                         <label for="price" class="form-label">Price</label>
-                        <input type="number" class="form-control" name="price" id="production_year" placeholder="NIS" required>
+                        <input type="number" class="form-control" name="price" id="production_year" placeholder="{{car.price}} NIS" required>
                         <div class="invalid-feedback">
                             Production Year is required.
                         </div>
                     </div>
-                    <button class="btn btn-dark" type="submit">Add Car</button>
+                    <button class="btn btn-dark" type="submit">Edit Car</button>
                 </form>
             </div>
                 <!-- <div class="row-6">
@@ -120,13 +132,15 @@
                 </tr>
             </thead>
             <tbody>
+                {% for car in garage %}
                 <tr class="display">
-                    <td scope="row" name="tree_id"><span>brand</span></td>
+                    <td scope="row" name="car_id"><span>{{car.brand}}</span></td>
                     <td>
-                        <input type="hidden" name="tree_id" value="{{ tree.id }}">
-                        <a href="#">Edit</a>
+                        <input type="hidden" name="car_id" value="{{ car.id }}">
+                        <a href="/my_dashboard/edit_car/{{car.id}}/">Edit</a>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

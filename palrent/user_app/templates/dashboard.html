@@ -141,15 +141,16 @@
               {% csrf_token %}
               <div class="row align-items-center">
 
-                <div class="mb-3 mb-md-0 col-md-3">
-                  <select name="" id="" class="custom-select form-control">
-                    <option value="">Select Type</option>
-                    <option value="">Ferrari</option>
-                    <option value="">Toyota</option>
-                    <option value="">Ford</option>
-                    <option value="">Lamborghini</option>
+                <div class="col-sm-5">
+                  <label for="location" class="form-label">Location</label>
+                  <select name="location" id="location" class="custom-select form-control">
+                      <option value="All">All</option>
+                      <option value="Ramallah">Ramallah</option>
+                      <option value="Nablus">Nablus</option>
+                      <option value="Jenin">Jenin</option>
+                      <option value="Bethlahm">Bethlahm</option>
                   </select>
-                </div>
+              </div>
                 <div class="mb-3 mb-md-0 col-md-3">
                   <div class="form-control-wrap">
                     <input type="text" id="cf-3" placeholder="Pick up" class="form-control datepicker px-3">
