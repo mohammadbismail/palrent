@@ -14,5 +14,4 @@ urlpatterns = [
     path("provider_dashboard/", views.provider_dashboard),
     path("add_edit/", views.add_edit),
     path("insert_car/", views.insert_car),
-    path("delete/", views.delete),
 ]

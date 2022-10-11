@@ -5,7 +5,11 @@ from .models import Car
 
 
 def my_dashboard(request):
-    return render(request,"dashboard.html")
+
+    if "customer_id" not in request.session:
+        return redirect("/")
+
+    return render(request,"my_dashboard.html")
 
 def search(request):
 
@@ -65,11 +69,4 @@ def insert_car(request):
         )
     return redirect("/add_edit")
 
-def delete(request):
 
-    del request.session["customer_id"]
-    del request.session["provider_id"]
-    del request.session["customer_first_name"]
-    del request.session["provider_name"]
-
-    return redirect("/")

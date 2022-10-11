@@ -126,6 +126,26 @@ def provider_register(request):
     return redirect("/provider_dashboard")
 
 
+def delete(request):
+    print("logout works")
+    if "customer_id" in request.session:
+
+        del request.session["customer_id"]
+        del request.session["customer_first_name"]
+
+        return redirect("/")
+
+    if "provider_id" in request.session:
+    
+        del request.session["provider_id"]
+        del request.session["provider_name"]
+
+        return redirect("/")
+
+    else:
+        return redirect("/")
+
+
 
 
 
