@@ -46,10 +46,11 @@
                             src="https://www.freepnglogos.com/uploads/honda-car-png/honda-car-upcoming-new-honda-cars-india-new-honda-3.png"
                             alt="">
                     </div>
+                    <input type="hidden" name="car_id" value="{{car.id}}">
                     <div class="col-lg-5 p-0 ps-lg-4" id="pay_details">
                         <div class="row m-0">
                             <div class="col-12 px-4">
-                                <form action="/car_book/" method="post">
+                                <form action="/car_book/{{selected_car.id}}/" method="post">
                                     {% csrf_token %}
                                     <div class="d-flex align-items-end mt-4 mb-2">
                                         <p class="h4 m-0">{{selected_car.brand}}</p>

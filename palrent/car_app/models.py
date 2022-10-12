@@ -15,8 +15,8 @@ class Car(models.Model):
 class Booking(models.Model):
     pick_up_date = models.DateField()
     drop_off_date = models.DateField()
-    customer_id = models.ForeignKey(Customer, related_name="customers_booking", on_delete=models.CASCADE)
-    car_id = models.ForeignKey(Car, related_name="cars_booking", on_delete=models.CASCADE)
+    customer_book = models.ForeignKey(Customer, related_name="customers_booked", on_delete=models.CASCADE)
+    car_book = models.ForeignKey(Car, related_name="cars_booked", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

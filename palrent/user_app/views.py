@@ -11,9 +11,8 @@ def dashboard(request):
 
 def search(request):
 
-    # request.session["location"] = request.POST["location"]
-    # request.session["pick_up_date"] = request.POST["pick_up_date"]
-    # request.session["drop_off_date"] = request.POST["drop_off_date"]
+    if "customer_id" in request.session:
+        return redirect("/my_dashboard/search_result")
 
     return redirect("/search_result")
 
@@ -28,6 +27,10 @@ def search_result(request):
 
 
 def car_select(request, car_id):
+
+    if "customer_id" in request.session:
+        return redirect("/my_dashboard/car_details/"+car_id)
+
     return redirect("/car_details/"+car_id)
 
 
@@ -38,7 +41,9 @@ def car_details(request, car_id):
     return render(request,"car_details.html", context)
 
 
-def car_book(request):
+def car_book(request, car_id):
+    if "customer_id" in request.session:
+        return redirect("/my_dashboard/payment_confirmation/"+car_id)
     return redirect("/register")
 
 
@@ -115,7 +120,7 @@ def provider_register(request):
     password_from_form = request.POST["password"]
     pw_hash = bcrypt.hashpw(password_from_form.encode(), bcrypt.gensalt()).decode()
 
-    Provider.objects.create(
+    provider = Provider.objects.create(
         name=request.POST["name"],
         email=request.POST["email"],
         password=pw_hash,
@@ -123,6 +128,8 @@ def provider_register(request):
         permit=request.POST["permit"],
         location=request.POST["location"],
     )
+    request.session['provider_id']=provider.id
+    request.session['provider_name']=provider.name
     return redirect("/my_dashboard/provider_dashboard")
 
 
@@ -145,6 +152,9 @@ def delete(request):
     else:
         return redirect("/")
 
+
+def contact(request):
+    return render(request, 'contact.html')
 
 
 

@@ -19,27 +19,63 @@ def my_dashboard(request):
 
     return render(request,"my_dashboard.html", context)
 
+def search(request):
+
+    # request.session["location"] = request.POST["location"]
+    # request.session["pick_up_date"] = request.POST["pick_up_date"]
+    # request.session["drop_off_date"] = request.POST["drop_off_date"]
+
+    return redirect("/my_dashboard/search_result")
+
+def search_result(request):
+
+    context = {
+        'searched_cars': Provider.objects.filter(location=request.POST["location"])
+    }
+
+    return render(request,"search_result.html", context)
+
+def car_select(request, car_id):
+    return redirect("/my_dashboard/car_details/"+car_id)
+
+
+def car_details(request, car_id):
+    context = {
+        'selected_car': Car.objects.get(id=car_id)
+    }
+    return render(request,"car_details.html", context)
+
+
+def car_book(request, car_id):
+
+    return redirect("/my_dashboard/payment_confirmation/"+car_id)
+
 
 def provider_dashboard(request):
-    provider_id = request.session["provider_id"]
+    
     print("this works here")
     context = {
-        'cars': Car.objects.filter(provider=request.session["provider_id"]),
-        'provider_id': provider_id
+        'cars': Car.objects.filter(id=request.session['provider_id']),
+
     }
     return render(request,"provider_dashboard.html", context)
 
 
 def car_book(request):
-    return redirect("/payment_confirmation")
+    return redirect("/my_dashboard/payment_confirmation")
 
 
 def payment_method(request):
     return render(request,"payment_method.html")
 
 
-def payment_confirmation(request):
-    return render(request,"payment_confirmation.html")
+def payment_confirmation(request, car_id):
+
+    context = {
+        'car_id': car_id
+    }
+
+    return render(request,"payment_confirmation.html", context)
 
 
 def confirm_book(request):
