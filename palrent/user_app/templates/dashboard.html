@@ -137,7 +137,7 @@
               </div>
             </div>
 
-            <form class="trip-form" action="search_result/" method="POST">
+            <form class="trip-form" action="/search_result/" method="POST">
               {% csrf_token %}
               <div class="row align-items-center">
 
@@ -153,14 +153,14 @@
               </div>
                 <div class="mb-3 mb-md-0 col-md-3">
                   <div class="form-control-wrap">
-                    <input type="text" id="cf-3" placeholder="Pick up" class="form-control datepicker px-3">
+                    <input type="date" id="cf-3" placeholder="Pick up" name="pick_up_date" class="form-control datepicker px-3">
                     <span class="icon icon-date_range"></span>
 
                   </div>
                 </div>
                 <div class="mb-3 mb-md-0 col-md-3">
                   <div class="form-control-wrap">
-                    <input type="text" id="cf-4" placeholder="Drop off" class="form-control datepicker px-3">
+                    <input type="date" id="cf-4" placeholder="Drop off" name="drop_off_date" class="form-control datepicker px-3">
                     <span class="icon icon-date_range"></span>
                   </div>
                 </div>

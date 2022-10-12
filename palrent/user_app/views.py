@@ -11,9 +11,9 @@ def dashboard(request):
 
 def search(request):
 
-    request.session["location"] = request.POST['location']
-    request.session["pick_up_date"] = request.POST['pick_up_date']
-    request.session["drop_off_date"] = request.POST['drop_off_date']
+    # request.session["location"] = request.POST["location"]
+    # request.session["pick_up_date"] = request.POST["pick_up_date"]
+    # request.session["drop_off_date"] = request.POST["drop_off_date"]
 
     return redirect("/search_result")
 
@@ -21,7 +21,7 @@ def search(request):
 def search_result(request):
 
     context = {
-        'searched_cars': Provider.objects.filter(location=request.session["location"])
+        'searched_cars': Provider.objects.filter(location=request.POST["location"])
     }
 
     return render(request,"search_result.html", context)

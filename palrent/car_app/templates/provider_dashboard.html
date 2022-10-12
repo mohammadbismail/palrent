@@ -14,8 +14,15 @@
 </head>
 
 <body>
+    <input type="hidden" name="provider_id" value="{{provider.id}}">
     <a href="/my_dashboard/add_car/">
         <button class="btn btn-primary">Add Car</button>
+    </a>
+    <a href="/my_dashboard/provider_account/{{provider_id}}/">
+        <button class="btn btn-primary">My account</button>
+    </a>
+    <a href="/delete/">
+        <button class="btn btn-primary">Log Out</button>
     </a>
     <h2>Welcome, <span class="name">{{request.session.provider_name}}</span></h2>
     <div class="container">
@@ -34,12 +41,13 @@
             <div class="car_list">
                 <div class="search_result">
                     <!-- TODO: for loop for filtered cars -->
+                    {% for car in cars %}
                     <div class="car_box">
                         <img class="car_pic" src="{% static 'img/car_pic.jpg' %}" alt="car pic">
                         <div class="car_details">
-                            <h6>Car name</h6>
-                            <h6>production_year</h6>
-                            <h6>color</h6>
+                            <h6>{{car.brand}}</h6>
+                            <h6>{{car.production_year}}</h6>
+                            <h6>{{car.color}}</h6>
                             <h6>rating*****</h6>
                         </div>
                         <div class="payment_details">
@@ -52,51 +60,11 @@
                             <h6>droped off date: 20/10/2022</h6>
                             <h6>days: 10</h6>
                         </div>
-                        <button class="btn btn-dark" type="submit">View Car</button>
+                        <a href="/my_dashboard/provider_car_details/{{car.id}}/">
+                            <button class="btn btn-primary">View Car</button>
+                        </a>
                     </div>
-                    <div class="car_box">
-                        <img class="car_pic" src="{% static 'img/car_pic.jpg' %}" alt="car pic">
-                        <div class="car_details">
-                            <h6>Car name</h6>
-                            <h6>production_year</h6>
-                            <h6>color</h6>
-                            <h6>rating*****</h6>
-                        </div>
-                        <div class="payment_details">
-                            <h6>Tenant: Ahmad Waleed</h6>
-                            <h6>price 150$</h6>
-                            <h6>total price 1500$</h6>
-                        </div>
-                        <div class="dates">
-                            <h6>picked up date: 10/10/2022</h6>
-                            <h6>droped off date: 20/10/2022</h6>
-                            <h6>days: 10</h6>
-                        </div>
-                        <button class="btn btn-dark" type="submit">View Car</button>
-                    </div>
-                    <!-- TODO: endfor -->
-                    <!-- TODO: the following divisions are  examples and will be deleted when the loop is on -->
-                    <div class="car_box">
-                        <img class="car_pic" src="{% static 'img/car_pic.jpg' %}" alt="car pic">
-                        <div class="car_details">
-                            <h6>Car name</h6>
-                            <h6>production_year</h6>
-                            <h6>color</h6>
-                            <h6>rating*****</h6>
-                        </div>
-                        <div class="payment_details">
-                            <h6>Tenant: Ahmad Waleed</h6>
-                            <h6>price 150$</h6>
-                            <h6>total price 1500$</h6>
-                        </div>
-                        <div class="dates">
-                            <h6>picked up date: 10/10/2022</h6>
-                            <h6>droped off date: 20/10/2022</h6>
-                            <h6>days: 10</h6>
-                        </div>
-                        <button class="btn btn-dark" type="submit">View Car</button>
-                    </div>
-                    <!-- TODO: delete till here -->
+                    {% endfor %}
                 </div>
             </div>
         </div>

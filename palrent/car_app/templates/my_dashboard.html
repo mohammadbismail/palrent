@@ -48,7 +48,8 @@
               <p class="slogan-header">Car rental in Palestine</p>
             </div>
           </div>
-          <h4>heloo{{request.session.customer_first_name}}</h4>
+
+
           <div class="col-9  text-right">
             <span class="d-inline-block d-lg-none"><a href="#" class=" site-menu-toggle js-menu-toggle py-5 "><span
                   class="icon-menu h3 text-black"></span></a></span>
@@ -59,13 +60,16 @@
                 <a href="/delete/">
                   <button class="btn btn-primary">Log Out</button>
                 </a>
-
+                <h4>heloo ,{{request.session.customer_first_name}}</h4>
 
               </ul>
             </nav>
           </div>
 
-
+          <input type="hidden" name="customer_id" value="{{customer.id}}">
+          <a href="/my_dashboard/customer_account/{{customer_id}}/">
+            <button type="submit" class="btn-outline">My account</button>
+        </a>
         </div>
       </div>
 
@@ -83,7 +87,7 @@
               </div>
             </div>
 
-            <form class="trip-form" action="search_result/" method="POST">
+            <form class="trip-form" action="/search_result/" method="POST">
               {% csrf_token %}
               <div class="row align-items-center">
 
@@ -98,14 +102,14 @@
                 </div>
                 <div class="mb-3 mb-md-0 col-md-3">
                   <div class="form-control-wrap">
-                    <input type="text" id="cf-3" placeholder="Pick up" class="form-control datepicker px-3">
+                    <input type="date" id="cf-3" placeholder="Pick up" class="form-control datepicker px-3">
                     <span class="icon icon-date_range"></span>
 
                   </div>
                 </div>
                 <div class="mb-3 mb-md-0 col-md-3">
                   <div class="form-control-wrap">
-                    <input type="text" id="cf-4" placeholder="Drop off" class="form-control datepicker px-3">
+                    <input type="date" id="cf-4" placeholder="Drop off" class="form-control datepicker px-3">
                     <span class="icon icon-date_range"></span>
                   </div>
                 </div>
