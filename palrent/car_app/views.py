@@ -5,13 +5,14 @@ from .models import Car
 import bcrypt
 
 
-def my_dashboard(request, customer_id):
+def my_dashboard(request):
 
     if "customer_id" not in request.session:
         return redirect("/")
 
+    customer_id = request.session["customer_id"]
+
     context = {
-        'cars': Car.objects.filter(provider=request.session["provider_id"]),
         'customer_id': customer_id
     }
 
@@ -139,7 +140,7 @@ def provider_car_details(request, car_id):
 def customer_account(request, customer_id):
     print("this works here")
     context = {
-        'customer.id': customer_id,
+        'customer_id': customer_id,
         'customer': Customer.objects.get(id=customer_id)
     }
 
@@ -167,3 +168,6 @@ def customer_account_edit(request, customer_id):
     c.save()
 
     return redirect("/my_dashboard/customer_account/"+customer_id)
+
+def contact(request):
+    return render(request, 'contact.html')
